@@ -10,8 +10,14 @@ describe Airport do
     expect(subject.hangar).to eq([])
   end
 
-  it('has a capacity') do
-    expect(subject.capacity).to eq(Airport::CAPACITY)
+  it('has a default capacity') do
+    expect(subject.capacity).to eq(Airport::DEFAULT_CAPACITY)
+  end
+
+  it('can have a custom capacity') do
+    custom_capacity = 50;
+    airport = described_class.new(custom_capacity)
+    expect(airport.capacity).to eq(custom_capacity)
   end
 
   context('when weather is clear') do
