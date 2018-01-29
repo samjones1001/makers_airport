@@ -10,6 +10,7 @@ class Airport
   end
 
   def receive(vehicle)
+    raise 'cannot land due to weather' if stormy?
     hangar.push(vehicle)
   end
 

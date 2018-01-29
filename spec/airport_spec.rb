@@ -36,6 +36,12 @@ describe Airport do
       allow(subject).to receive(:rand).and_return(0)
     end
 
+    describe('#receive') do
+      it('raises an error') do
+        expect{ subject.receive(plane) }.to raise_error('cannot land due to weather')
+      end
+    end
+
     describe('#release') do
       it('raises an error') do
         expect{ subject.release(plane) }.to raise_error('cannot take off due to weather')
