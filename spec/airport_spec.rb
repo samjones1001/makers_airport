@@ -10,6 +10,10 @@ describe Airport do
     expect(subject.hangar).to eq([])
   end
 
+  it('has a capacity') do
+    expect(subject.capacity).to eq(Airport::CAPACITY)
+  end
+
   context('when weather is clear') do
     before(:each) do
       allow(subject).to receive(:rand).and_return(1)
@@ -19,6 +23,11 @@ describe Airport do
       it('stores the passed vehicle in the hangar') do
         subject.receive(plane)
         expect(subject.hangar).to include(plane)
+      end
+
+      it('raise an error if the airport is full') do
+        subject.capacity.times { subject.receive(plane) }
+        expect{ subject.receive(plane) }.to raise_error('hangar full')
       end
     end
 
