@@ -19,11 +19,16 @@ class Airport
 
   def release(vehicle)
     raise 'cannot take off due to weather' if stormy?
+    raise 'plane is not in the hangar' if !vehicle_present?(vehicle)
     hangar.delete(vehicle)
   end
 
   private
   def full?
     hangar.length >= capacity
+  end
+
+  def vehicle_present?(vehicle)
+    hangar.include?(vehicle)
   end
 end

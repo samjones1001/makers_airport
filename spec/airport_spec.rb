@@ -43,6 +43,10 @@ describe Airport do
         subject.release(plane)
         expect(subject.hangar).to_not include(plane)
       end
+
+      it('raises an error if plane is not present') do
+        expect{ subject.release(plane) }.to raise_error('plane is not in the hangar')
+      end
     end
   end
 
