@@ -1,7 +1,28 @@
 require 'plane'
 
 describe Plane do
+  let(:airport) { double :airport, :receive => subject, :release => subject }
+
   it('should respond to land') do
     expect(subject).to respond_to(:land).with(1).argument
+  end
+
+  it('should respond to take_off') do
+    expect(subject).to respond_to(:take_off).with(1).argument
+  end
+
+  describe('#land') do
+    it('should cause the passed airport to receive the plane') do
+      expect(airport).to receive(:receive)
+      subject.land(airport)
+    end
+  end
+
+  describe('#take_off') do
+    it('should cause the passed airport to release the plane') do
+      subject.land(airport)
+      expect(airport).to receive(:release)
+      subject.take_off(airport)
+    end
   end
 end
